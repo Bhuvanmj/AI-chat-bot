@@ -5,9 +5,9 @@ from groq_chat import ask_groq
 app = FastAPI()
 
 class ChatRequest(BaseModel):
-    message: str
+    messages: list  # Accept full list of messages
 
 @app.post("/chat")
 async def chat(req: ChatRequest):
-    reply = await ask_groq(req.message)
+    reply = await ask_groq(req.messages)
     return {"response": reply}
